@@ -17,7 +17,7 @@ class UserGroupsController extends Controller
      */
     public function index(Request $request, User $user)
     {
-        $this->authorize('view', $user);
+        // $this->authorize('view', $user);
 
         $search = $request->get('search', '');
 
@@ -37,7 +37,7 @@ class UserGroupsController extends Controller
      */
     public function store(Request $request, User $user)
     {
-        $this->authorize('create', Group::class);
+        // $this->authorize('create', Group::class);
 
         $validated = $request->validate([
             'image' => ['image', 'max:1024'],

@@ -17,7 +17,7 @@ class GroupMessagesController extends Controller
      */
     public function index(Request $request, Group $group)
     {
-        $this->authorize('view', $group);
+        // $this->authorize('view', $group);
 
         $search = $request->get('search', '');
 
@@ -37,7 +37,7 @@ class GroupMessagesController extends Controller
      */
     public function store(Request $request, Group $group)
     {
-        $this->authorize('create', Message::class);
+        // $this->authorize('create', Message::class);
 
         $validated = $request->validate([
             'image' => ['image', 'max:1024', 'nullable'],

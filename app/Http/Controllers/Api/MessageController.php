@@ -19,7 +19,7 @@ class MessageController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view-any', Message::class);
+        // $this->authorize('view-any', Message::class);
 
         $search = $request->get('search', '');
 
@@ -36,7 +36,7 @@ class MessageController extends Controller
      */
     public function store(MessageStoreRequest $request)
     {
-        $this->authorize('create', Message::class);
+        // $this->authorize('create', Message::class);
 
         $validated = $request->validated();
         if ($request->hasFile('image')) {
@@ -55,7 +55,7 @@ class MessageController extends Controller
      */
     public function show(Request $request, Message $message)
     {
-        $this->authorize('view', $message);
+        // $this->authorize('view', $message);
 
         return new MessageResource($message);
     }
@@ -67,7 +67,7 @@ class MessageController extends Controller
      */
     public function update(MessageUpdateRequest $request, Message $message)
     {
-        $this->authorize('update', $message);
+        // $this->authorize('update', $message);
 
         $validated = $request->validated();
 
@@ -91,7 +91,7 @@ class MessageController extends Controller
      */
     public function destroy(Request $request, Message $message)
     {
-        $this->authorize('delete', $message);
+        // $this->authorize('delete', $message);
 
         if ($message->image) {
             Storage::delete($message->image);

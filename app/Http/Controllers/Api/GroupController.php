@@ -19,7 +19,7 @@ class GroupController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view-any', Group::class);
+        // $this->authorize('view-any', Group::class);
 
         $search = $request->get('search', '');
 
@@ -36,7 +36,7 @@ class GroupController extends Controller
      */
     public function store(GroupStoreRequest $request)
     {
-        $this->authorize('create', Group::class);
+        // $this->authorize('create', Group::class);
 
         $validated = $request->validated();
         if ($request->hasFile('image')) {
@@ -55,7 +55,7 @@ class GroupController extends Controller
      */
     public function show(Request $request, Group $group)
     {
-        $this->authorize('view', $group);
+        // $this->authorize('view', $group);
 
         return new GroupResource($group);
     }
@@ -67,7 +67,7 @@ class GroupController extends Controller
      */
     public function update(GroupUpdateRequest $request, Group $group)
     {
-        $this->authorize('update', $group);
+        // $this->authorize('update', $group);
 
         $validated = $request->validated();
 
@@ -91,7 +91,7 @@ class GroupController extends Controller
      */
     public function destroy(Request $request, Group $group)
     {
-        $this->authorize('delete', $group);
+        // $this->authorize('delete', $group);
 
         if ($group->image) {
             Storage::delete($group->image);

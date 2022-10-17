@@ -17,7 +17,7 @@ class MessageMessagesController extends Controller
      */
     public function index(Request $request, Message $message)
     {
-        $this->authorize('view', $message);
+        // $this->authorize('view', $message);
 
         $search = $request->get('search', '');
 
@@ -37,7 +37,7 @@ class MessageMessagesController extends Controller
      */
     public function store(Request $request, Message $message)
     {
-        $this->authorize('create', Message::class);
+        // $this->authorize('create', Message::class);
 
         $validated = $request->validate([
             'image' => ['image', 'max:1024', 'nullable'],
