@@ -34,8 +34,9 @@ Route::middleware('auth:sanctum')
     ->name('api.user');
 
 Route::name('api.')
-    // ->middleware('auth:sanctum')
+    ->middleware('auth:sanctum')
     ->group(function () {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('api.logout');
         Route::apiResource('roles', RoleController::class);
         Route::apiResource('permissions', PermissionController::class);
 
