@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -28,6 +29,23 @@ class AuthController extends Controller
         }
 
         $user = User::whereEmail($request->email)->firstOrFail();
+
+        $token = $user->createToken('auth-token');
+
+        return response()->json([
+            'token' => $token->plainTextToken,
+            'user' => $user
+        ]);
+    }
+
+    public function register(Request $request)
+    {
+        $this->validate($request, ['email' => 'required|email|unique:users,email', 'name' => 'required|string|max:125','password'=>'required|string|min:8|confirmed']);
+
+        $validated = $request->all();
+        $validated['password'] = Hash::make($validated['password']);
+
+        $user = User::create($validated);
 
         $token = $user->createToken('auth-token');
 

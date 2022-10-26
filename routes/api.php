@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\MessageMessagesController;
 */
 
 Route::post('/login', [AuthController::class, 'login'])->name('api.login');
+Route::post('/register', [AuthController::class, 'register'])->name('api.register');
 
 Route::middleware('auth:sanctum')
     ->get('/user', function (Request $request) {
