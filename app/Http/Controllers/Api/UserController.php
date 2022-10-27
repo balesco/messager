@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view-any', User::class);
+        // $this->authorize('view-any', User::class);
 
         $search = $request->get('search', '');
 
@@ -37,7 +37,7 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        $this->authorize('create', User::class);
+        // $this->authorize('create', User::class);
 
         $validated = $request->validated();
 
@@ -61,7 +61,7 @@ class UserController extends Controller
      */
     public function show(Request $request, User $user)
     {
-        $this->authorize('view', $user);
+        // $this->authorize('view', $user);
 
         return new UserResource($user);
     }
@@ -73,7 +73,7 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
-        $this->authorize('update', $user);
+        // $this->authorize('update', $user);
 
         $validated = $request->validated();
 
@@ -105,7 +105,7 @@ class UserController extends Controller
      */
     public function destroy(Request $request, User $user)
     {
-        $this->authorize('delete', $user);
+        // $this->authorize('delete', $user);
 
         if ($user->photo) {
             Storage::delete($user->photo);
