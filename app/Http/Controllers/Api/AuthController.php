@@ -29,6 +29,7 @@ class AuthController extends Controller
         }
 
         $user = User::whereEmail($request->email)->firstOrFail();
+        $user->tokens()->where('name', 'auth-token')->delete();
 
         $token = $user->createToken('auth-token');
 
@@ -40,15 +41,17 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $this->validate($request, ['email' => 'required|email|unique:users,email', 'name' => 'required|string|max:125','password'=>'required|string|min:8|confirmed']);
+        $this->validate($request, ['email' => 'required|email|unique:users,email', 'name' => 'required|string|max:125', 'password' => 'required|string|min:8|confirmed']);
 
         $validated = $request->all();
         $validated['password'] = Hash::make($validated['password']);
 
         $user = User::create($validated);
+        $user->assignRole('user');
+
+        $user->tokens()->where('name', 'auth-token')->delete();
 
         $token = $user->createToken('auth-token');
-
         return response()->json([
             'token' => $token->plainTextToken,
             'user' => $user
