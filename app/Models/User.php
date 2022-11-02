@@ -28,6 +28,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = ['image'];
+
+    public function getImageAttribute()
+    {
+        return asset('images/user.png');
+    }
+
     public function messages()
     {
         return $this->hasMany(Message::class, 'sender_id');
